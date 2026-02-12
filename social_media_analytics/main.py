@@ -26,7 +26,8 @@ from analyzers.video_analyzer import VideoAnalyzer
 from visualizations.charts import ChartGenerator
 from visualizations.wordcloud_gen import WordCloudGenerator
 from visualizations.dashboard import Dashboard
-from config import DATA_DIR, OUTPUT_DIR
+from config import DATA_DIR, OUTPUT_DIR, REPORTS_DIR
+from datetime import datetime
 
 
 def print_header():
@@ -374,9 +375,22 @@ def generate_visualizations(df, summary, emoji_results, posts):
     # Keyword frequency word cloud
     keywords = text_analyzer.extract_keywords(all_text, top_n=50)
     if keywords:
+        kw_dict = dict(keywords)
         wc_gen.generate_frequency_wordcloud(
-            dict(keywords), title="Top Keywords"
+            kw_dict, title="Top Keywords"
         )
+
+        # Persist keyword frequencies to a JSON report for teacher review
+        word_counts_path = os.path.join(REPORTS_DIR, "word_counts.json")
+        try:
+            with open(word_counts_path, 'w', encoding='utf-8') as wf:
+                json.dump({
+                    'generated_at': datetime.utcnow().isoformat(),
+                    'keywords': kw_dict
+                }, wf, ensure_ascii=False, indent=2)
+            print(f"✅ Keyword frequencies saved: {word_counts_path}")
+        except Exception as e:
+            print(f"⚠️ Failed to save keyword frequencies: {e}")
 
     # Sentiment-specific word clouds
     positive_texts = " ".join(
