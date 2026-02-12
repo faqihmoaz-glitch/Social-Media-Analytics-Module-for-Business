@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-02-12T10:04:13.544503",
+  "results": {
+    "text_analysis_summary": {
+      "total_posts": 3,
+      "positive_count": 3,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "avg_sentiment": 0.5567533333333333,
+      "sentiment_std": 0.3073235521943174,
+      "most_positive": "Just finished an amazing project! 🎉 #python #coding",
+      "most_negative": "Coffee is life ☕ #morning #motivation",
+      "positive_percentage": 100.0,
+      "negative_percentage": 0.0,
+      "neutral_percentage": 0.0
+    },
+    "emoji_analysis": {
+      "top_emojis": [
+        [
+          "🎉",
+          1
+        ],
+        [
+          "🌅",
+          1
+        ],
+        [
+          "☕",
+          1
+        ]
+      ],
+      "sentiment_distribution": {
+        "positive": 1,
+        "neutral": 2
+      }
+    }
+  }
+}
